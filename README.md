@@ -19,6 +19,15 @@ cada día los pesos, repeticiones y series de cada ejercicio. Inspirada en [Hevy
 - **Perfil**: gráfico semanal (duración, volumen, repeticiones), calendario de entrenamientos y totales.
 - Exportar / importar los datos en JSON. Todo se guarda localmente en el navegador.
 
+## Abrirla en el móvil
+
+La app se publica automáticamente en **https://pablobacigalupe.github.io/trainer/** con cada push
+(workflow `.github/workflows/deploy.yml`). Ábrela en el navegador del móvil y usa
+«Añadir a pantalla de inicio» para tenerla como una app más.
+
+Para activarlo la primera vez: en GitHub, *Settings → Pages → Build and deployment → Source:
+GitHub Actions*, y vuelve a lanzar el workflow desde la pestaña *Actions*.
+
 ## Uso
 
 ```bash
