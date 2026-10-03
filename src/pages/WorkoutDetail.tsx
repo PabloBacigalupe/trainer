@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { askConfirm } from '../components/Confirm';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { ExerciseAvatar } from '../components/ExerciseAvatar';
 import { setLabels } from '../components/ExerciseEditor';
@@ -144,8 +145,8 @@ export default function WorkoutDetail() {
               label: 'Eliminar entrenamiento',
               icon: <IconTrash size={18} />,
               danger: true,
-              onClick: () => {
-                if (confirm('¿Eliminar este entrenamiento?')) {
+              onClick: async () => {
+                if (await askConfirm('¿Eliminar este entrenamiento?', { confirmLabel: 'Eliminar', danger: true })) {
                   deleteWorkout(w.id);
                   navigate('/', { replace: true });
                 }

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { askConfirm } from '../components/Confirm';
 import { Link, useNavigate } from 'react-router-dom';
 import { ActionMenu } from '../components/Sheet';
 import { IconCopy, IconEdit, IconList, IconMore, IconPlay, IconPlus, IconTrash } from '../components/Icons';
@@ -10,11 +11,15 @@ export default function Train() {
   const navigate = useNavigate();
   const [menuFor, setMenuFor] = useState<Routine | null>(null);
 
-  const start = (r?: Routine) => {
-    if (state.active) {
-      if (!confirm('Ya tienes un entrenamiento en curso. ¿Descartarlo y empezar uno nuevo?')) {
-        return;
-      }
+  const start = async (r?: Routine) => {
+    if (
+      state.active &&
+      !(await askConfirm('Ya tienes un entrenamiento en curso. ¿Descartarlo y empezar uno nuevo?', {
+        confirmLabel: 'Descartar y empezar',
+        danger: true,
+      }))
+    ) {
+      return;
     }
     startWorkout(r);
     navigate('/workout');
@@ -78,7 +83,9 @@ export default function Train() {
               label: 'Eliminar rutina',
               icon: <IconTrash size={18} />,
               danger: true,
-              onClick: () => confirm(`¿Eliminar la rutina «${menuFor.name}»?`) && deleteRoutine(menuFor.id),
+              onClick: async () =>
+                (await askConfirm(`¿Eliminar la rutina «${menuFor.name}»?`, { confirmLabel: 'Eliminar', danger: true })) &&
+                deleteRoutine(menuFor.id),
             },
           ]}
         />

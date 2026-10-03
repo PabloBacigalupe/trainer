@@ -1,4 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
+import { askConfirm, showMessage } from '../components/Confirm';
 import { Link } from 'react-router-dom';
 import { BarChart } from '../components/Charts';
 import { REST_OPTIONS, fmtRest } from '../components/ExerciseEditor';
@@ -103,12 +104,16 @@ export default function Profile() {
   };
 
   const importData = async (file: File) => {
+    let data: AppState;
     try {
-      const data = JSON.parse(await file.text()) as AppState;
+      data = JSON.parse(await file.text()) as AppState;
       if (!Array.isArray(data.workouts) || !Array.isArray(data.routines)) throw new Error();
-      if (confirm('Esto reemplazará todos tus datos actuales. ¿Continuar?')) replaceState(data);
     } catch {
-      alert('El archivo no es válido.');
+      await showMessage('El archivo no es válido. Elige un JSON exportado desde esta app.');
+      return;
+    }
+    if (await askConfirm('Esto reemplazará todos tus datos actuales. ¿Continuar?', { confirmLabel: 'Reemplazar', danger: true })) {
+      replaceState(data);
     }
   };
 

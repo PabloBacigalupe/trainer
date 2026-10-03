@@ -1,4 +1,5 @@
 import { NavLink, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { ConfirmHost } from './components/Confirm';
 import { IconDumbbell, IconHome, IconUser } from './components/Icons';
 import ActiveWorkout, { RestWatcher } from './pages/ActiveWorkout';
 import ExerciseDetail from './pages/ExerciseDetail';
@@ -62,6 +63,7 @@ export default function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <RestWatcher />
+      <ConfirmHost />
       {showMini && <MiniWorkoutBar />}
       {!fullScreen && (
         <div className="tabbar">

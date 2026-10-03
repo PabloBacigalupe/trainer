@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { askConfirm } from '../components/Confirm';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { LineChart } from '../components/Charts';
 import { setLabels } from '../components/ExerciseEditor';
@@ -67,8 +68,8 @@ export default function ExerciseDetail() {
             <button
               className="icon-btn"
               aria-label="Eliminar ejercicio"
-              onClick={() => {
-                if (confirm('¿Eliminar este ejercicio personalizado?')) {
+              onClick={async () => {
+                if (await askConfirm('¿Eliminar este ejercicio personalizado?', { confirmLabel: 'Eliminar', danger: true })) {
                   deleteCustomExercise(ex.id);
                   navigate(-1);
                 }

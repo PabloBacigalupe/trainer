@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { askConfirm } from '../components/Confirm';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { ExerciseList } from '../components/ExerciseList';
 import { IconDown } from '../components/Icons';
@@ -176,8 +177,8 @@ export default function ActiveWorkout() {
         />
         <button
           className="btn danger block"
-          onClick={() => {
-            if (confirm('¿Descartar este entrenamiento? Se perderá todo el progreso.')) {
+          onClick={async () => {
+            if (await askConfirm('¿Descartar este entrenamiento? Se perderá todo el progreso.', { confirmLabel: 'Descartar', danger: true })) {
               discardWorkout();
               navigate('/train', { replace: true });
             }
