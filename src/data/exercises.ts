@@ -1,0 +1,133 @@
+import type { Equipment, Exercise, ExerciseKind, MuscleGroup } from '../types';
+
+export const MUSCLE_LABELS: Record<MuscleGroup, string> = {
+  pecho: 'Pecho',
+  espalda: 'Espalda',
+  hombros: 'Hombros',
+  biceps: 'Bíceps',
+  triceps: 'Tríceps',
+  antebrazos: 'Antebrazos',
+  abdominales: 'Abdominales',
+  cuadriceps: 'Cuádriceps',
+  isquiotibiales: 'Isquiotibiales',
+  gluteos: 'Glúteos',
+  pantorrillas: 'Pantorrillas',
+  trapecio: 'Trapecio',
+  cardio: 'Cardio',
+  cuerpo_completo: 'Cuerpo completo',
+};
+
+export const EQUIPMENT_LABELS: Record<Equipment, string> = {
+  barra: 'Barra',
+  mancuerna: 'Mancuerna',
+  maquina: 'Máquina',
+  polea: 'Polea',
+  peso_corporal: 'Peso corporal',
+  kettlebell: 'Kettlebell',
+  banda: 'Banda',
+  otro: 'Otro',
+};
+
+type Row = [string, string, MuscleGroup, Equipment, ExerciseKind?];
+
+const rows: Row[] = [
+  // Pecho
+  ['bench-press', 'Press de banca (barra)', 'pecho', 'barra'],
+  ['incline-bench-press', 'Press inclinado (barra)', 'pecho', 'barra'],
+  ['decline-bench-press', 'Press declinado (barra)', 'pecho', 'barra'],
+  ['db-bench-press', 'Press de banca (mancuerna)', 'pecho', 'mancuerna'],
+  ['db-incline-press', 'Press inclinado (mancuerna)', 'pecho', 'mancuerna'],
+  ['db-fly', 'Aperturas (mancuerna)', 'pecho', 'mancuerna'],
+  ['cable-crossover', 'Cruce de poleas', 'pecho', 'polea'],
+  ['pec-deck', 'Pec deck (máquina)', 'pecho', 'maquina'],
+  ['chest-press-machine', 'Press de pecho (máquina)', 'pecho', 'maquina'],
+  ['push-up', 'Flexiones', 'pecho', 'peso_corporal', 'reps'],
+  ['chest-dip', 'Fondos para pecho', 'pecho', 'peso_corporal', 'reps'],
+  // Espalda
+  ['deadlift', 'Peso muerto (barra)', 'espalda', 'barra'],
+  ['barbell-row', 'Remo con barra', 'espalda', 'barra'],
+  ['db-row', 'Remo con mancuerna', 'espalda', 'mancuerna'],
+  ['pull-up', 'Dominadas', 'espalda', 'peso_corporal', 'reps'],
+  ['chin-up', 'Dominadas supinas', 'espalda', 'peso_corporal', 'reps'],
+  ['lat-pulldown', 'Jalón al pecho (polea)', 'espalda', 'polea'],
+  ['seated-cable-row', 'Remo sentado (polea)', 'espalda', 'polea'],
+  ['t-bar-row', 'Remo en T', 'espalda', 'barra'],
+  ['machine-row', 'Remo (máquina)', 'espalda', 'maquina'],
+  ['straight-arm-pulldown', 'Pullover en polea', 'espalda', 'polea'],
+  ['back-extension', 'Hiperextensiones', 'espalda', 'peso_corporal', 'reps'],
+  // Hombros
+  ['ohp', 'Press militar (barra)', 'hombros', 'barra'],
+  ['db-shoulder-press', 'Press de hombros (mancuerna)', 'hombros', 'mancuerna'],
+  ['arnold-press', 'Press Arnold', 'hombros', 'mancuerna'],
+  ['lateral-raise', 'Elevaciones laterales (mancuerna)', 'hombros', 'mancuerna'],
+  ['cable-lateral-raise', 'Elevaciones laterales (polea)', 'hombros', 'polea'],
+  ['front-raise', 'Elevaciones frontales', 'hombros', 'mancuerna'],
+  ['rear-delt-fly', 'Pájaros (mancuerna)', 'hombros', 'mancuerna'],
+  ['face-pull', 'Face pull', 'hombros', 'polea'],
+  ['shoulder-press-machine', 'Press de hombros (máquina)', 'hombros', 'maquina'],
+  // Trapecio
+  ['barbell-shrug', 'Encogimientos (barra)', 'trapecio', 'barra'],
+  ['db-shrug', 'Encogimientos (mancuerna)', 'trapecio', 'mancuerna'],
+  ['upright-row', 'Remo al mentón', 'trapecio', 'barra'],
+  // Bíceps
+  ['barbell-curl', 'Curl con barra', 'biceps', 'barra'],
+  ['db-curl', 'Curl con mancuerna', 'biceps', 'mancuerna'],
+  ['hammer-curl', 'Curl martillo', 'biceps', 'mancuerna'],
+  ['preacher-curl', 'Curl predicador', 'biceps', 'barra'],
+  ['cable-curl', 'Curl en polea', 'biceps', 'polea'],
+  ['incline-curl', 'Curl inclinado (mancuerna)', 'biceps', 'mancuerna'],
+  ['concentration-curl', 'Curl concentrado', 'biceps', 'mancuerna'],
+  // Tríceps
+  ['triceps-pushdown', 'Extensión de tríceps en polea', 'triceps', 'polea'],
+  ['rope-pushdown', 'Extensión con cuerda (polea)', 'triceps', 'polea'],
+  ['skull-crusher', 'Press francés', 'triceps', 'barra'],
+  ['overhead-triceps', 'Extensión sobre la cabeza (mancuerna)', 'triceps', 'mancuerna'],
+  ['close-grip-bench', 'Press de banca agarre cerrado', 'triceps', 'barra'],
+  ['triceps-dip', 'Fondos de tríceps', 'triceps', 'peso_corporal', 'reps'],
+  ['triceps-kickback', 'Patada de tríceps', 'triceps', 'mancuerna'],
+  // Antebrazos
+  ['wrist-curl', 'Curl de muñeca', 'antebrazos', 'barra'],
+  ['farmers-walk', 'Paseo del granjero', 'antebrazos', 'mancuerna'],
+  // Piernas
+  ['squat', 'Sentadilla (barra)', 'cuadriceps', 'barra'],
+  ['front-squat', 'Sentadilla frontal', 'cuadriceps', 'barra'],
+  ['goblet-squat', 'Sentadilla goblet', 'cuadriceps', 'kettlebell'],
+  ['leg-press', 'Prensa de piernas', 'cuadriceps', 'maquina'],
+  ['hack-squat', 'Sentadilla hack', 'cuadriceps', 'maquina'],
+  ['leg-extension', 'Extensión de piernas', 'cuadriceps', 'maquina'],
+  ['bulgarian-split-squat', 'Sentadilla búlgara', 'cuadriceps', 'mancuerna'],
+  ['lunge', 'Zancadas (mancuerna)', 'cuadriceps', 'mancuerna'],
+  ['romanian-deadlift', 'Peso muerto rumano', 'isquiotibiales', 'barra'],
+  ['lying-leg-curl', 'Curl femoral tumbado', 'isquiotibiales', 'maquina'],
+  ['seated-leg-curl', 'Curl femoral sentado', 'isquiotibiales', 'maquina'],
+  ['good-morning', 'Buenos días', 'isquiotibiales', 'barra'],
+  ['hip-thrust', 'Hip thrust (barra)', 'gluteos', 'barra'],
+  ['glute-bridge', 'Puente de glúteos', 'gluteos', 'peso_corporal', 'reps'],
+  ['cable-kickback', 'Patada de glúteo (polea)', 'gluteos', 'polea'],
+  ['hip-abduction', 'Abducción de cadera (máquina)', 'gluteos', 'maquina'],
+  ['standing-calf-raise', 'Elevación de talones de pie', 'pantorrillas', 'maquina'],
+  ['seated-calf-raise', 'Elevación de talones sentado', 'pantorrillas', 'maquina'],
+  // Abdominales
+  ['crunch', 'Crunch abdominal', 'abdominales', 'peso_corporal', 'reps'],
+  ['hanging-leg-raise', 'Elevación de piernas colgado', 'abdominales', 'peso_corporal', 'reps'],
+  ['cable-crunch', 'Crunch en polea', 'abdominales', 'polea'],
+  ['plank', 'Plancha', 'abdominales', 'peso_corporal', 'duration'],
+  ['russian-twist', 'Giros rusos', 'abdominales', 'peso_corporal', 'reps'],
+  ['ab-wheel', 'Rueda abdominal', 'abdominales', 'otro', 'reps'],
+  // Cardio / cuerpo completo
+  ['running', 'Correr', 'cardio', 'otro', 'duration'],
+  ['cycling', 'Bicicleta', 'cardio', 'maquina', 'duration'],
+  ['rowing-machine', 'Remo ergómetro', 'cardio', 'maquina', 'duration'],
+  ['jump-rope', 'Saltar la cuerda', 'cardio', 'otro', 'duration'],
+  ['burpee', 'Burpees', 'cuerpo_completo', 'peso_corporal', 'reps'],
+  ['kettlebell-swing', 'Swing con kettlebell', 'cuerpo_completo', 'kettlebell'],
+  ['clean-and-press', 'Cargada y press', 'cuerpo_completo', 'barra'],
+];
+
+export const BUILTIN_EXERCISES: Exercise[] = rows.map(([id, name, muscle, equipment, kind]) => ({
+  id,
+  name,
+  muscle,
+  equipment,
+  kind: kind ?? 'weight_reps',
+}));
